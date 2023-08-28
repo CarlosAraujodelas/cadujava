@@ -1,1 +1,15 @@
+void excluir_curso(int pos) {
+    int i;
+    for(int i = pos; i <= cont_curso; i++) {
+            if(i==9){
+            strcpy(cursos[i].nome, "");
+            strcpy(cursos[i].COD, "");
+        }
+        else{
+           cursos[i] = cursos[i+1];
+        }
+    }
+    cout << "Curso excluído com sucesso!";
+    cont_curso--;
+}
 
