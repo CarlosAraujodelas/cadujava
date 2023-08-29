@@ -15,7 +15,7 @@ package model;
 public class Aluno {
 public String nome, matricula;
 public Curso curso;
-
+}
 AlunoController:
 
 package controller;
