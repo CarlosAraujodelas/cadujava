@@ -1,0 +1,117 @@
+import tela.LivroInterfaceCadastro;
+
+public class Livro {
+
+	public static void main (String[] args) {
+     LivroInterfaceCadastro livro = new LivroInterfaceCadastro();
+     livro.cadastrarLivro();
+	}
+
+}
+
+package controller;
+
+import model.Livro;
+import tela.LivroInterfaceCadastro;
+public class LivroController {
+	Livro livro = new Livro();
+
+	public void criarLivro(){
+		LivroInterfaceCadastro ail = new LivroInterfaceCadastro();
+		livro = ail.cadastrarLivro();
+	}
+	
+	public void exibirLivro() {
+		
+	}
+	
+}
+
+package model;
+
+import java.util.List;
+
+public class Livro {
+ private String titulo;
+ private String autores[];
+ List<Pagina> paginas;
+ 
+public String getTitulo() {
+	return titulo;
+}
+public void setTitulo(String titulo) {
+	this.titulo = titulo;
+}
+public String[] getAutores() {
+	return autores;
+}
+public void setAutores(String string) {
+	this.autores = string;
+}
+public List<Pagina> getPaginas() {
+	return paginas;
+}
+public void setPaginas(List<Pagina> paginas) {
+	this.paginas = paginas;
+}
+ 
+ 
+}
+
+package model;
+
+import java.util.List;
+
+public class Pagina {
+int numero;
+ List<String> linha;
+ 
+public int getNumero() {
+	return numero;
+}
+public void setNumero(int numero) {
+	this.numero = numero;
+}
+public List<String> getLinha() {
+	return linha;
+}
+public void setLinha(List<String> linha) {
+	this.linha = linha;
+}
+ 
+ 
+}
+
+package tela;
+import java.util.Scanner;
+
+import model.Livro;
+
+public class LivroInterfaceCadastro {
+
+	public Livro cadastrarLivro() {
+		
+		Livro livro = new Livro();
+		
+		int cont, aut;
+		Scanner a = new Scanner (System.in);
+		Scanner num = new Scanner (System.in);
+		
+		System.out.printf("Informe o título do LIvro\n:");
+		livro.setTitulo(a.nextLine());
+		
+		System.out.printf("Quantos autores\n:");
+		aut= num.nextInt();
+		
+		for(cont=0;cont<aut;cont++) {
+			System.out.printf("Autor %i\n:", cont);
+			livro.setAutores(a.nextLine());
+		}
+		return livro;
+	}
+	
+	
+	
+	
+
+}
