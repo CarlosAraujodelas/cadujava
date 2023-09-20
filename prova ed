@@ -188,7 +188,7 @@ void cadastrar_aluno(){
     scanf(" %[^\n]",alunos[cont_aluno].nome);
     cout<<"\nSexo:";
     scanf(" %[^\n]",alunos[cont_aluno].sexo);
-    cout<<"\n\tALUNO CADASTRADO!!";
+    cout<<"\n\tALUNO CADASTRADO!!\n";
     cont_aluno++;
 }
 
@@ -278,7 +278,7 @@ void cadastrar_turma(){
    }
    cout<<"Faltas:\n";
    cin>>turmas[cont_turma].faltas;
-    cout<<"\n\tTURMA CADASTRADA!!";
+    cout<<"\n\tTURMA CADASTRADA!!\n";
     cont_turma++;
 }
 
@@ -307,6 +307,7 @@ int buscar_disciplina(){
                     }
                 }
 }
+
 
 int buscar_turma(){
     int contador, compara;
@@ -339,7 +340,7 @@ void excluir_aluno(int pos) {
             alunos[i]=alunos[i+1];
             }
     }
-    cout << "aluno excluído com sucesso!";
+    cout << "aluno excluído com sucesso!\n";
     cont_aluno--;
 }
 
@@ -355,7 +356,7 @@ void excluir_disciplina(int pos) {
             disciplinas[i]=disciplinas[i+1];
             }
     }
-    cout << "Disciplina excluída com sucesso!";
+    cout << "Disciplina excluída com sucesso!\n";
     cont_disciplina--;
 }
 
@@ -402,7 +403,7 @@ void altera_turma(int pos){
    }
    cout<<"Faltas:\n";
    cin>>turmas[pos].faltas;
-   cout<<"\n\tTURMA RECADASTRADA!!";
+   cout<<"\nTURMA RECADASTRADA!!\n";
 }
 
 
@@ -454,7 +455,7 @@ void altera_aluno(int pos){
     scanf(" %[^\n]",alunos[pos].nome);
     cout<<"\nSexo:";
     scanf(" %[^\n]",alunos[pos].sexo);
-    cout<<"\n\tALUNO RECADASTRADO!!";
+    cout<<"\n\tALUNO RECADASTRADO!!\n";
 }
 
 void altera_disciplina(int pos){
@@ -462,7 +463,7 @@ void altera_disciplina(int pos){
     cin>>disciplinas[pos].carga_h;
     cout<<"\nNome:";
     scanf(" %[^\n]",disciplinas[pos].nome);
-    cout<<"\n\tDISCIPLINA RECADASTRADA!!";
+    cout<<"\n\tDISCIPLINA RECADASTRADA!!\n";
 }
 
 
@@ -538,8 +539,8 @@ void menu(){
             }
             break;
         case 3:
-             system("cls");
             while(op2!=0){
+            system("cls");
             cout<<"O que quer excluir?\n";
             cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
             cin>>op2;
@@ -567,25 +568,27 @@ void menu(){
             }
             break;
         case 4:
-            system("pause");
         system("cls");
             while(op2!=0){
+            system("cls");
             cout<<"O que quer exibir?\n";
             cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
             cin>>op2;
              switch(op2) {
              case 0:
-                 system("pause");
                  system("cls");
              break;
              case 1:
                 exibe_aluno();
+                system("pause");
              break;
              case 2:
                 exibe_disciplina();
+                system("pause");
              break;
              case 3:
                 exibe_turma();
+                system("pause");
              break;
              default:
                 system("cls");
