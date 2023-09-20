@@ -42,12 +42,26 @@ int cont_aluno, cont_turma, cont_disciplina;
 
 
 void ler_aluno_arquivo() {
-
     FILE *pont_arq;
-    int cont = 0;
+    int cont = 0, i;
     pont_arq = fopen("aluno.txt", "r");
     if(pont_arq){
         while(fscanf(pont_arq ,"%s%s%s", alunos[cont].matricula_a, alunos[cont].nome, alunos[cont].sexo) != EOF) {
+            for(i = 0; i <= strlen(alunos[cont].nome); i++) {
+                if(alunos[cont].nome[i] == '_') {
+                    alunos[cont].nome[i] = ' ';
+                }
+            }
+            for(i = 0; i <= strlen(alunos[cont].matricula_a); i++) {
+                if(alunos[cont].matricula_a[i] == '_') {
+                    alunos[cont].matricula_a[i] = ' ';
+                }
+            }
+            for(i = 0; i <= strlen(alunos[cont].sexo); i++) {
+                if(alunos[cont].sexo[i] == '_') {
+                    alunos[cont].sexo[i] = ' ';
+                }
+            }
             cont++;
             cont_aluno++;
         }
@@ -55,17 +69,73 @@ void ler_aluno_arquivo() {
     }
     else
         printf("\nERRO ao abrir arquivo!\n");
- }
+}
 
 void gravar_aluno_arquivo() {
     FILE *pont_arq;
-    int i;
+    int i, pos, cont;
     pont_arq = fopen("aluno.txt", "w");
     if(pont_arq) {
         for(int pos = 0; pos < cont_aluno; pos++) {
+            for(i = 0; i < strlen(alunos[pos].nome); i++) {
+                if(alunos[pos].nome[i] == ' ') {
+                    alunos[pos].nome[i] = '_';
+                }
+            }
+        for(i = 0; i < strlen(alunos[pos].matricula_a); i++) {
+                if(alunos[pos].matricula_a[i] == ' ') {
+                    alunos[pos].matricula_a[i] = '_';
+                }
+            }
+        for(i = 0; i < strlen(alunos[pos].sexo); i++) {
+                if(alunos[pos].sexo[i] == ' ') {
+                    alunos[pos].sexo[i] = '_';
+                }
+            }
             fprintf(pont_arq, "%s \n", alunos[pos].matricula_a);
             fprintf(pont_arq, "%s \n", alunos[pos].nome);
             fprintf(pont_arq, "%s \n", alunos[pos].sexo);
+        }
+        fclose(pont_arq);
+    } else {
+        printf("\nERRO ao abrir arquivo!\n");
+    }
+}
+
+void ler_disciplina_arquivo() {
+    FILE *pont_arq;
+    int cont = 0, i;
+    pont_arq = fopen("disciplina.txt", "r");
+    if(pont_arq){
+        while(fscanf(pont_arq ,"%d%s%d",&disciplinas[cont].numero, disciplinas[cont].nome, &disciplinas[cont].carga_h) != EOF) {
+            for(i = 0; i <= strlen(disciplinas[cont].nome); i++) {
+                if(disciplinas[cont].nome[i] == '_') {
+                    disciplinas[cont].nome[i] = ' ';
+                }
+            }
+            cont++;
+            cont_disciplina++;
+        }
+        fclose(pont_arq);
+    }
+    else
+        printf("\nERRO ao abrir arquivo!\n");
+}
+
+void gravar_disciplina_arquivo() {
+    FILE *pont_arq;
+    int i, pos, cont;
+    pont_arq = fopen("disciplina.txt", "w");
+    if(pont_arq) {
+        for(int pos = 0; pos < cont_disciplina; pos++) {
+            for(i = 0; i < strlen(disciplinas[pos].nome); i++) {
+                if(disciplinas[pos].nome[i] == ' ') {
+                    disciplinas[pos].nome[i] = '_';
+                }
+            }
+            fprintf(pont_arq, "%d \n", disciplinas[pos].numero);
+            fprintf(pont_arq, "%s \n", disciplinas[pos].nome);
+            fprintf(pont_arq, "%d \n", disciplinas[pos].carga_h);
         }
         fclose(pont_arq);
     } else {
@@ -146,7 +216,7 @@ void cadastrar_disciplina(){
     cin>>disciplinas[cont_disciplina].carga_h;
     cout<<"\nNome:";
     scanf(" %[^\n]",disciplinas[cont_disciplina].nome);
-    cout<<"\n\tDISCIPLINA CADASTRADA!!";
+    cout<<"\n\tDISCIPLINA CADASTRADA!!\n";
     cont_disciplina++;
 }
 
@@ -176,6 +246,7 @@ void cadastrar_turma(){
             if(strcmp(alunos[contador].matricula_a, pkey)==0){
                    strcpy(turmas[cont_turma].matricula_a_t, pkey);
                  sair = 1;
+                 break;
                 }
             if(contador==cont_aluno) {
                 cout << "Matrícula não existe!\n";
@@ -188,24 +259,11 @@ void cadastrar_turma(){
          if(cont_disciplina==0){
                 cadastrar_disciplina();
             }
-        while(sair != 1) {
-        cout<<"\nNúmero da Disciplina: ";
-        cin>>compara;
-        for(contador = 0; contador <= cont_disciplina; contador++){
-                if(disciplinas[contador].numero==compara){
-                   turmas[cont_turma].disc=compara;
-                sair = 1;
-            } if(contador==cont_disciplina){
-                cout << "Número não existe existe!";
-                sair = 0;
-                break;
-            }
-        }
-    }
+    turmas[cont_turma].disc=escolher_disciplina();
    cout<<"Ano letivo:\n";
    cin>>turmas[cont_turma].ano;
    for(contador=0;contador<3;contador++){
-    printf("Nota %d :\n", contador);
+    printf("Nota %d :\n", contador+1);
     cin>>turmas[cont_turma].nota[contador];
    }
    for(contador=0;contador<3;contador++){
@@ -227,7 +285,7 @@ void cadastrar_turma(){
 int buscar_aluno(){
     int contador;
     char matricula_compara[TAMPKEY];
-    cout<<"\n\tInforme a matrícula  do funcionário\n: ";
+    cout<<"\n\tInforme a matrícula  do aluno\n: ";
                 scanf(" %[^\n]",matricula_compara);
       for(contador = 0; contador < cont_aluno; contador++){
                     if(strcmp(alunos[contador].matricula_a, matricula_compara)==0){
@@ -241,7 +299,7 @@ int buscar_disciplina(){
     int contador, compara;
     char matricula_compara[TAMPKEY];
     cout<<"\n\tInforme o numero da disciplina\n: ";
-                cin>>compara;
+    cin>>compara;
       for(contador = 0; contador < cont_aluno; contador++){
                     if(compara==disciplinas[contador].numero){
                         system("cls");
@@ -250,6 +308,25 @@ int buscar_disciplina(){
                 }
 }
 
+int buscar_turma(){
+    int contador, compara;
+    char matricula_compara[TAMPKEY];
+    cout<<"\n\tInforme a matrícula  do aluno\n: ";
+    scanf(" %[^\n]",matricula_compara);
+    cout<<"\n\tInforme o numero da disciplina\n: ";
+    cin>>compara;
+      for(contador = 0; contador <=cont_turma; contador++){
+            if(contador==cont_turma){
+                cout<<"Não existe turma correspondente com tal aluno e discipina";
+
+            }
+             break;
+            if((strcmp(turmas[contador].matricula_a_t, matricula_compara)==0) && (turmas[contador].disc==compara)){
+                        system("cls");
+                        return contador;
+                    }
+        }
+}
 
 void excluir_aluno(int pos) {
     int i;
@@ -273,7 +350,7 @@ void excluir_disciplina(int pos) {
             if(i==cont_disciplina){
             disciplinas[i].numero=0;
             strcpy(disciplinas[i].nome,"");
-           disciplinas[i].carga_h=0;
+             disciplinas[i].carga_h=0;
             }else{
             disciplinas[i]=disciplinas[i+1];
             }
@@ -281,24 +358,71 @@ void excluir_disciplina(int pos) {
     cout << "Disciplina excluída com sucesso!";
     cont_disciplina--;
 }
-void exibe(){
-    int op,cont, cont2;
-              while(op != 5){
-        cout<<"aluno-1\nturma-2\ndisiplina-3\n:";
-        cin >> op;
-        switch(op){
-            case 1:
-                for(cont=0;cont<cont_aluno;cont++){
-                        cout<<"Aluno "<<cont+1<<"------\n";
+
+void excluir_turma(int pos){
+    int i, contador;
+    for(int i = pos; i <=cont_turma; i++) {
+            if(i==cont_turma){
+                for(contador=0;contador<4;contador++){
+                   turmas[i].nota[contador]=0;
+                }
+            turmas[i].disc=0;
+            turmas[i].ano=0;
+            turmas[i].faltas=0;
+            strcpy(turmas[i].matricula_a_t,"");
+            strcpy(turmas[i].situacao,"");
+            }else{
+            turmas[i]=turmas[i+1];
+            }
+    }
+    cout << "Turma excluída com sucesso!";
+    cont_turma--;
+}
+
+
+
+void altera_turma(int pos){
+    int contador;
+    float soma;
+   cout<<"Ano letivo:\n";
+   cin>>turmas[pos].ano;
+   for(contador=0;contador<3;contador++){
+    printf("Nota %d :\n", contador);
+    cin>>turmas[pos].nota[contador];
+   }
+   for(contador=0;contador<3;contador++){
+    soma=soma+turmas[pos].nota[contador];
+   }
+   soma=soma/3;
+   turmas[pos].nota[3]=soma;
+   if(turmas[pos].nota[3]<6){
+    strcpy(turmas[pos].situacao, "reprovado");
+   }else{
+       strcpy(turmas[pos].situacao, "aprovado");
+   }
+   cout<<"Faltas:\n";
+   cin>>turmas[pos].faltas;
+   cout<<"\n\tTURMA RECADASTRADA!!";
+}
+
+
+
+void exibe_aluno(){
+    int cont;
+    system("cls");
+         for(cont=0;cont<cont_aluno;cont++){
+         cout<<"Aluno "<<cont+1<<"------\n";
          cout<<"matricula :"<< alunos[cont].matricula_a<<"\n";
          cout<<"nome :"<< alunos[cont].nome<<"\n";
-         cout<<"sexo kkk :"<< alunos[cont].sexo<<"\n";
+         cout<<"sexo :"<< alunos[cont].sexo<<"\n";
          }
-                break;
-                op=5;
-            case 2:
+}
+
+void exibe_turma(){
+    int cont, cont2;
+    system("cls");
                for(cont=0;cont<cont_turma;cont++){
-                      cout<<"turma "<<cont+1<<"------\n";
+         cout<<"turma "<<cont+1<<"------\n";
          cout<<"disciplina :"<< turmas[cont].disc<<"\n";
          cout<<"aluno mat :"<< turmas[cont].matricula_a_t<<"\n";
          cout<<"ano :"<< turmas[cont].ano<<"\n";
@@ -306,30 +430,23 @@ void exibe(){
                 if(cont2==3){
                cout<<"media :"<<turmas[cont].nota[cont2];
              }else{
-             cout<<"nota "<<cont2<<": "<<turmas[cont].nota[cont2];
+             cout<<" nota "<<cont2+1<<": "<<turmas[cont].nota[cont2];
           }
          }
           cout<<"situacao :"<< turmas[cont].situacao<<"\n";
            cout<<"faltas :"<< turmas[cont].faltas<<"\n";
                }
-                break;
-                 op=5;
-            case 3:
+}
+
+void exibe_disciplina(){
+    int cont;
+    system("cls");
                 for(cont=0;cont<cont_disciplina;cont++){
-                        cout<<"Disciplina"<<cont+1<<"------\n";
+         cout<<"Disciplina"<<cont+1<<"------\n";
          cout<<"num :"<< disciplinas[cont].numero<<"\n";
          cout<<"nome :"<< disciplinas[cont].nome<<"\n";
          cout<<"CH :"<< disciplinas[cont].carga_h<<"\n";
-         }
-                break;
-                 op=5;
-                default:
-                    cout<<"Opção inválida, tente novamente!\n:";
-                    break;
-    }
-    break;
-}
-
+ }
 }
 
 void altera_aluno(int pos){
@@ -348,59 +465,134 @@ void altera_disciplina(int pos){
     cout<<"\n\tDISCIPLINA RECADASTRADA!!";
 }
 
+
 void menu(){
-    int opcao=7, op2;
+    int opcao=1, op2;
     while(opcao != 0) {
-        cout << "\nSair-[0]\ncadastrar [1] \nalterar [2]\nexcluir[3]\nExibir[4]:";
-       scanf("%d", &opcao);
+    op2=1;
+    system("cls");
+    cout << "Bem vindo ao sistema!\nO que deseja fazer?\n";
+    cout << "\nSair-[0]\nCadastrar [1] \nAlterar [2]\nExcluir[3]\nExibir[4]\n:";
+    scanf("%d", &opcao);
         switch(opcao) {
-             case 0:
+            case 0:
+             system("cls");
              cout << "Tchau";
             break;
         case 1:
             system("cls");
-            while(op2 <1 || op2>3){
+            while(op2!=0){
             cout<<"O que quer cadastrar?\n";
-             cout<<"aluno-1\ndisciplina-2\nturma-3\n:";
-             cin>>op2;
-            }
-            if(op2==1){
+            cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
+            cin>>op2;
+             switch(op2) {
+             case 0:
+                 system("pause");
+                 system("cls");
+             break;
+             case 1:
+                system("cls");
                 cadastrar_aluno();
-            }
-             if(op2==2){
+             break;
+             case 2:
+                system("cls");
                 cadastrar_disciplina();
-            }
-             if(op2==3){
+             break;
+             case 3:
+                system("cls");
                 cadastrar_turma();
+             break;
+             default:
+                system("cls");
+                break;
+             }
             }
             break;
         case 2:
             system("cls");
+            while(op2!=0){
             cout<<"O que quer alterar?\n";
-            cout<<"aluno-1\ndisciplina-2\n:";
-            if(op2==1){
+            cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
+            cin>>op2;
+             switch(op2) {
+             case 0:
+                 system("pause");
+                 system("cls");
+             break;
+             case 1:
+                system("cls");
                 altera_aluno(buscar_aluno());
-            }
-             if(op2==2){
+             break;
+             case 2:
+                system("cls");
                 altera_disciplina(buscar_disciplina());
+             break;
+             case 3:
+                system("cls");
+                altera_turma(buscar_turma());
+             break;
+             default:
+                system("cls");
+                break;
+             }
             }
             break;
         case 3:
              system("cls");
-              cout<<"\nO que quer excluir?\n";
-            op2=pergunta();
-            if(op2==1){
+            while(op2!=0){
+            cout<<"O que quer excluir?\n";
+            cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
+            cin>>op2;
+             switch(op2) {
+             case 0:
+                 system("pause");
+                 system("cls");
+             break;
+             case 1:
+                system("cls");
                 excluir_aluno(buscar_aluno());
-            }
-             if(op2==2){
+             break;
+             case 2:
+                system("cls");
                 excluir_disciplina(buscar_disciplina());
+             break;
+             case 3:
+                system("cls");
+                excluir_turma(buscar_turma());
+             break;
+             default:
+                system("cls");
+                break;
+             }
             }
             break;
         case 4:
-            exibe();
-            break;
+            system("pause");
+        system("cls");
+            while(op2!=0){
+            cout<<"O que quer exibir?\n";
+            cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
+            cin>>op2;
+             switch(op2) {
+             case 0:
+                 system("pause");
+                 system("cls");
+             break;
+             case 1:
+                exibe_aluno();
+             break;
+             case 2:
+                exibe_disciplina();
+             break;
+             case 3:
+                exibe_turma();
+             break;
+             default:
+                system("cls");
+                break;
+             }
+            }
         default:
-            cout << "Opção inválida! ";
             break;
         }
     }
@@ -409,6 +601,8 @@ void menu(){
 main(){
     setlocale( LC_ALL, "portuguese" );
     ler_aluno_arquivo();
+    ler_disciplina_arquivo();
     menu();
     gravar_aluno_arquivo();
+    gravar_disciplina_arquivo();
 }
