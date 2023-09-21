@@ -224,8 +224,9 @@ int escolher_disciplina(){
     int cont, escolha;
     cout<<"Número das disciplinas:\n";
     for(cont=0;cont<cont_disciplina;cont++){
-        cout<<disciplinas[cont].numero<<"\n";
+        cout<<disciplinas[cont].numero<<" "<<disciplinas[cont].nome<<"\n";
     }
+    cout<<"Escolha a disciplina correspondente:\n";
     cin>>escolha;
     return escolha;
 }
@@ -409,45 +410,124 @@ void altera_turma(int pos){
 
 
 void exibe_aluno(){
-    int cont;
+    int cont, cont_exibe=0;
     system("cls");
+    cout<<"Lista dos alunos :";
+    gotoxy(5,2);
+    cout<<"---------------------------------------------------";
+    gotoxy(5,3);
+    cout<<"| Matrícula";
+    gotoxy(25,3);
+    cout<<"| Nome";
+    gotoxy(45,3);
+    cout<<"| Sexo";
+    gotoxy(55,3);
+    cout<<"|";
+    gotoxy(5,4);
+    cout<<"---------------------------------------------------";
          for(cont=0;cont<cont_aluno;cont++){
-         cout<<"Aluno "<<cont+1<<"------\n";
-         cout<<"matricula :"<< alunos[cont].matricula_a<<"\n";
-         cout<<"nome :"<< alunos[cont].nome<<"\n";
-         cout<<"sexo :"<< alunos[cont].sexo<<"\n";
-         }
+         gotoxy(5,5+cont_exibe);
+         cout<<"| "<< alunos[cont].matricula_a;
+         gotoxy(25,5+cont_exibe);
+         cout<<"| "<< alunos[cont].nome;
+         gotoxy(45,5+cont_exibe);
+         cout<<"| "<< alunos[cont].sexo;
+         gotoxy(55,5+cont_exibe);
+         cout<<"|";
+         cont_exibe++;
+         gotoxy(5,5+cont_exibe);
+         cout<<"---------------------------------------------------";
+         cont_exibe++;
+               }
+cout<<"\n";
 }
 
 void exibe_turma(){
-    int cont, cont2;
+    int cont, cont2,cont_exibe=0, nota_exibe=50;
     system("cls");
+    cout<<"Lista das turmas:";
+    gotoxy(5,2);
+    cout<<"----------------------------------------------------------------------------------------------------";
+    gotoxy(5,3);
+    cout<<"| Matrícula aluno";
+    gotoxy(25,3);
+    cout<<"| N° da Disciplina";
+    gotoxy(45,3);
+    cout<<"| Ano letivo";
+    gotoxy(50,3);
+    cout<<"| Nota 1";
+    gotoxy(58,3);
+    cout<<"| Nota 2";
+    gotoxy(66,3);
+    cout<<"| Nota 3";
+    gotoxy(74,3);
+    cout<<"| Média";
+    gotoxy(82,3);
+    cout<<"| Situação";
+    gotoxy(93,3);
+    cout<<"| Faltas";
+    gotoxy(105,3);
+    cout<<"|";
+    gotoxy(5,4);
+    cout<<"----------------------------------------------------------------------------------------------------";
                for(cont=0;cont<cont_turma;cont++){
-         cout<<"turma "<<cont+1<<"------\n";
-         cout<<"disciplina :"<< turmas[cont].disc<<"\n";
-         cout<<"aluno mat :"<< turmas[cont].matricula_a_t<<"\n";
-         cout<<"ano :"<< turmas[cont].ano<<"\n";
+         gotoxy(5,5+cont_exibe);
+         cout<<"| "<<turmas[cont].matricula_a_t;
+         gotoxy(25,5+cont_exibe);
+         cout<<"| "<<turmas[cont].disc;
+         gotoxy(45,5+cont_exibe);
+         cout<<"| "<<turmas[cont].ano;
+         nota_exibe=50;
          for(cont2=0;cont2<4;cont2++){
-                if(cont2==3){
-               cout<<"media :"<<turmas[cont].nota[cont2];
-             }else{
-             cout<<" nota "<<cont2+1<<": "<<turmas[cont].nota[cont2];
-          }
+         gotoxy(nota_exibe,5+cont_exibe);
+         printf("|%.1f",turmas[cont].nota[cont2]);
+         nota_exibe=nota_exibe+8;
          }
-          cout<<"situacao :"<< turmas[cont].situacao<<"\n";
-           cout<<"faltas :"<< turmas[cont].faltas<<"\n";
+         gotoxy(82,5+cont_exibe);
+         cout<<"| "<< turmas[cont].situacao;
+         gotoxy(93,5+cont_exibe);
+         cout<<"| "<< turmas[cont].faltas;
+         gotoxy(105,5+cont_exibe);
+         cout<<"|";
+         cont_exibe++;
+         gotoxy(5,5+cont_exibe);
+         cout<<"----------------------------------------------------------------------------------------------------";
+         cont_exibe++;
                }
+cout<<"\n";
 }
 
 void exibe_disciplina(){
-    int cont;
+    int cont, cont_exibe=0;
     system("cls");
+    cout<<"Lista das disciplinas :";
+    gotoxy(5,2);
+    cout<<"--------------------------------------------------------";
+    gotoxy(5,3);
+    cout<<"| Nome";
+    gotoxy(25,3);
+    cout<<"| N° da Disciplina";
+    gotoxy(45,3);
+    cout<<"| Carga horária";
+    gotoxy(60,3);
+    cout<<"|";
+    gotoxy(5,4);
+    cout<<"--------------------------------------------------------";
                 for(cont=0;cont<cont_disciplina;cont++){
-         cout<<"Disciplina"<<cont+1<<"------\n";
-         cout<<"num :"<< disciplinas[cont].numero<<"\n";
-         cout<<"nome :"<< disciplinas[cont].nome<<"\n";
-         cout<<"CH :"<< disciplinas[cont].carga_h<<"\n";
+         gotoxy(5,5+cont_exibe);
+         cout<<"| "<< disciplinas[cont].nome;
+         gotoxy(25,5+cont_exibe);
+         cout<<"| "<< disciplinas[cont].numero;
+         gotoxy(42,5+cont_exibe);
+         cout<<"| "<< disciplinas[cont].carga_h;
+         gotoxy(60,5+cont_exibe);
+         cout<<"|";
+         cont_exibe++;
+         gotoxy(5,5+cont_exibe);
+         cout<<"--------------------------------------------------------";
+         cont_exibe++;
  }
+ cout<<"\n";
 }
 
 void altera_aluno(int pos){
@@ -481,27 +561,30 @@ void menu(){
              cout << "Tchau";
             break;
         case 1:
-            system("cls");
             while(op2!=0){
+            system("cls");
             cout<<"O que quer cadastrar?\n";
             cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
             cin>>op2;
              switch(op2) {
              case 0:
-                 system("pause");
                  system("cls");
+                 system("pause");
              break;
              case 1:
                 system("cls");
                 cadastrar_aluno();
+                system("pause");
              break;
              case 2:
                 system("cls");
                 cadastrar_disciplina();
+                system("pause");
              break;
              case 3:
                 system("cls");
                 cadastrar_turma();
+                system("pause");
              break;
              default:
                 system("cls");
@@ -510,28 +593,30 @@ void menu(){
             }
             break;
         case 2:
-            system("cls");
             while(op2!=0){
+                    system("cls");
             cout<<"O que quer alterar?\n";
             cout<<"Sair[0]\nAluno-[1]\nDisciplina-[2]\nTurma-[3]\n:";
             cin>>op2;
              switch(op2) {
              case 0:
-                 system("pause");
                  system("cls");
+                 system("pause");
              break;
              case 1:
                 system("cls");
                 altera_aluno(buscar_aluno());
+            system("pause");
              break;
              case 2:
                 system("cls");
                 altera_disciplina(buscar_disciplina());
+                system("pause");
              break;
              case 3:
                 system("cls");
                 altera_turma(buscar_turma());
-             break;
+                system("pause");
              default:
                 system("cls");
                 break;
@@ -546,20 +631,23 @@ void menu(){
             cin>>op2;
              switch(op2) {
              case 0:
-                 system("pause");
                  system("cls");
+                 system("pause");
              break;
              case 1:
                 system("cls");
                 excluir_aluno(buscar_aluno());
+                system("pause");
              break;
              case 2:
                 system("cls");
                 excluir_disciplina(buscar_disciplina());
+                system("pause");
              break;
              case 3:
                 system("cls");
                 excluir_turma(buscar_turma());
+                system("pause");
              break;
              default:
                 system("cls");
@@ -577,6 +665,7 @@ void menu(){
              switch(op2) {
              case 0:
                  system("cls");
+                 system("pause");
              break;
              case 1:
                 exibe_aluno();
