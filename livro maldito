@@ -1,85 +1,118 @@
-import tela.LivroInterfaceCadastro;
+import tela.menuInterface;
 
 public class Livro {
 
-	public static void main (String[] args) {
-     LivroInterfaceCadastro livro = new LivroInterfaceCadastro();
-     livro.cadastrarLivro();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+ menuInterface menu = new menuInterface();
+ menu.mostrarMenu();
 	}
 
 }
 
+
 package controller;
 
-import model.Livro;
-import tela.LivroInterfaceCadastro;
-public class LivroController {
-	Livro livro = new Livro();
+import java.util.ArrayList;
+import java.util.List;
 
-	public void criarLivro(){
-		LivroInterfaceCadastro ail = new LivroInterfaceCadastro();
-		livro = ail.cadastrarLivro();
-	}
-	
-	public void exibirLivro() {
+import model.Livro;
+import model.Pagina;
+import tela.livroInterfaceCadastro;
+import tela.paginaInterfaceCadastro;
+public class livroController {
+List<Livro> livros= new ArrayList<>();
+List<Pagina> paginas= new ArrayList<>();
+Livro livro= new Livro();
+
+public void cadastrarLivro() {
+	livroInterfaceCadastro lc = new livroInterfaceCadastro();
+	livros.add(lc.cadastrarLivro());
+ }
+
+
+	 public void cadastrarPagina() {
+		 paginaInterfaceCadastro pc= new paginaInterfaceCadastro();
+		 livro.inserirPaginas(pc.cadastrarPagina());
+		 livros.add(livro);
+	 }
+
+
+ public void visualisarLivros() {
 		
+		for(Livro livro:livros) {
+			System.out.printf("Total de livros: %d\n", livros.size());
+			System.out.printf("Título: %s\n", livro.getTitulo());
+			System.out.printf("Autor(es): %s\n", livro.getAutores());
+		}
 	}
-	
+ 
+ public void visualisarPagina() {
+		
+		for(Pagina pagina:paginas) {
+			System.out.printf("Número: %s\n", pagina.getNumero());
+			System.out.printf("Autor(es): %s\n", pagina.getLinhas());
+		}
+	}
+ 
 }
 
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Livro {
- private String titulo;
- private String autores[];
- List<Pagina> paginas;
- 
+private String titulo;
+private List<String> autores= new ArrayList<>(); 
+private List<Pagina> paginas= new ArrayList<>();
+
 public String getTitulo() {
 	return titulo;
 }
 public void setTitulo(String titulo) {
 	this.titulo = titulo;
 }
-public String[] getAutores() {
+public List<String> getAutores() {
 	return autores;
 }
-public void setAutores(String string) {
-	this.autores = string;
+public void inserirAutores(String autores) {
+	this.autores.add(autores);
+}
+
+
+public void inserirPaginas(Pagina paginas) {
+	this.paginas.add(paginas);
 }
 public List<Pagina> getPaginas() {
 	return paginas;
 }
-public void setPaginas(List<Pagina> paginas) {
-	this.paginas = paginas;
-}
- 
- 
+
+
 }
 
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pagina {
-int numero;
- List<String> linha;
- 
+private int numero;
+private List<String> linhas= new ArrayList<>();
 public int getNumero() {
 	return numero;
 }
 public void setNumero(int numero) {
 	this.numero = numero;
 }
-public List<String> getLinha() {
-	return linha;
+
+public List<String> getLinhas() {
+	return linhas;
 }
-public void setLinha(List<String> linha) {
-	this.linha = linha;
+
+public void inserirLinhas(String linha) {
+	this.linhas.add(linha);
 }
- 
- 
 }
 
 package tela;
@@ -87,31 +120,119 @@ import java.util.Scanner;
 
 import model.Livro;
 
-public class LivroInterfaceCadastro {
-
-	public Livro cadastrarLivro() {
-		
-		Livro livro = new Livro();
-		
-		int cont, aut;
-		Scanner a = new Scanner (System.in);
-		Scanner num = new Scanner (System.in);
-		
-		System.out.printf("Informe o título do LIvro\n:");
-		livro.setTitulo(a.nextLine());
-		
-		System.out.printf("Quantos autores\n:");
-		aut= num.nextInt();
-		
-		for(cont=0;cont<aut;cont++) {
-			System.out.printf("Autor %i\n:", cont);
-			livro.setAutores(a.nextLine());
-		}
-		return livro;
+public class livroInterfaceCadastro {
+public Livro cadastrarLivro() {
+	int op = 0, contador=1;
+	Livro livro= new Livro();
+	Scanner a = new Scanner (System.in);
+	Scanner b = new Scanner (System.in);
+	
+	System.out.printf("------CADASTRO DE LIVRO-------\n");
+	System.out.printf("Nome do Livro\n:");
+	livro.setTitulo(a.nextLine());
+	
+	System.out.printf("Autores\n:");
+	while(op!=2) {
+		System.out.printf("Autor %d:", contador);
+		livro.inserirAutores(a.nextLine());
+		System.out.printf("Continuar inserindo autores?\n[1]-SIM\n[2]-NÃO\n:");
+		op=b.nextInt();
+		contador++;
 	}
-	
-	
-	
-	
-
+	contador=1;
+	return livro;
 }
+	
+}
+
+package tela;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import controller.livroController;
+import model.Livro;
+
+
+
+public class menuInterface {
+ public void mostrarMenu() {
+		Scanner opcaoMenu = new Scanner(System.in);	
+		Scanner titulo = new Scanner(System.in);	
+		int opcao = 0;
+		List<Livro> livros= new ArrayList<>();
+	livroController livrocontroller = new livroController();
+		do{
+			System.out.println("1. Listar livros");
+			System.out.println("2. Cadastar livros");
+			System.out.println("3. Inserir Páginas");
+			System.out.println("4. Exibir Livro");
+			System.out.println("5. Sair");
+			System.out.print  ("Escolha uma Opção: ");
+	
+			opcao = opcaoMenu.nextInt();
+			
+			switch (opcao) {
+			case 1: 
+					livrocontroller.visualisarLivros();
+					break;
+				
+			case 2:
+				 livrocontroller.cadastrarLivro();
+					break;
+			case 3:
+				System.out.println("\nInforme o titulo do livro\n:");
+				titulo.nextLine();
+				for(Livro livro:livros) {
+			        if(titulo.equals(livro.getTitulo())) {
+			        	livrocontroller.cadastrarPagina();
+			        }
+				}
+					break;
+			case 4:
+				System.out.println("\nInforme o titulo do livro\n:");
+				titulo.nextLine();
+				for(Livro livro:livros) {
+					 if(titulo.equals(livro.getTitulo())) {
+			        	livrocontroller.visualisarPagina();
+			        }
+				}
+					break;
+			case 5:
+				System.out.printf("\nTchau!\n");
+				    break;
+			default:
+            	System.out.printf("\nOpção inválida, Tente novamente\n");
+            	break;
+			}
+		} while(opcao !=5);
+ }
+}
+
+package tela;
+
+import model.Pagina;
+import java.util.Scanner;
+public class paginaInterfaceCadastro {
+	
+public Pagina cadastrarPagina() {
+	
+	Pagina pagina = new Pagina();
+	String compara="a";
+	int cont=1;
+	Scanner a = new Scanner (System.in);
+	System.out.printf("Comece a inserir as linhas!\nPara parar digite !! ");
+	pagina.setNumero(cont);
+	compara=a.nextLine();
+	do {
+		compara=a.nextLine();
+		if(compara!="!!") {
+			pagina.inserirLinhas(compara);
+		}
+	}while(!compara.equals("!!"));
+	
+	return pagina;
+ }
+}
+
