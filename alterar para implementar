@@ -325,6 +325,9 @@ void alterarPaciente(){
 
                         printf("\n\tOpção Inválida!\n\t");
 
+           }while(op != 9);
+
+}
 
 
 void menuAlterar(){
@@ -382,6 +385,3 @@ void menuAlterar(){
 }
               }
 
-           }while(op != 9);
-
-}
