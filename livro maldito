@@ -1,6 +1,6 @@
 import tela.menuInterface;
 
-public class Livro {
+public class Escritora {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -11,7 +11,8 @@ public class Livro {
 }
 
 
-model
+model :
+
 
 package model;
 
@@ -47,6 +48,7 @@ public List<Pagina> getPaginas() {
 
 }
 
+
 package model;
 
 import java.util.ArrayList;
@@ -74,22 +76,25 @@ public void inserirLinhas(String linha) {
 
 }
 
-controller
+
+controller:
+
 
 package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import model.Livro;
 import model.Pagina;
-import tela.livroInterfaceCadastro;
+import tela.LivroInterfaceCadastro;
 import tela.paginaInterfaceCadastro;
-public class livroController {
+public class LivroController {
 List<Livro> livros= new ArrayList<>();
 
 public void cadastrarLivro() {
-	livroInterfaceCadastro lc = new livroInterfaceCadastro();
+	LivroInterfaceCadastro lc = new LivroInterfaceCadastro();
 	livros.add(lc.cadastrarLivro());
  }
 
@@ -101,7 +106,6 @@ public void cadastrarLivro() {
 	
 	
 	public void visualisarPagina(int pos) {	
-		Livro livro = new Livro();
 			List <Pagina> paginasa = new ArrayList<>();
 			System.out.printf("Título: %s\n", livros.get(pos).getTitulo());
 			System.out.printf("Autor(es): %s\n", livros.get(pos).getAutores());
@@ -113,9 +117,28 @@ public void cadastrarLivro() {
 					System.out.printf("%s\n",pagina.getLinhas().get(i));
 				}
 			}
-			
-		}
+	}
 
+	
+	public void cadastrarLinha(int posl, int posp) {
+		List <Pagina> paginasa = new ArrayList<>();
+		paginasa = livros.get(posl).getPaginas();
+		for(Pagina pagina : paginasa) {
+			if(pagina.getNumero()==posp) {
+				String compara="a";
+				Scanner a = new Scanner (System.in);
+				System.out.printf("Comece a inserir as linhas!\nPara parar digite !! ");
+				do {
+					compara=a.nextLine();
+					if(!compara.equals("!!")) {
+						pagina.inserirLinhas(compara);
+					}
+				}while(!compara.equals("!!"));
+			}
+		}
+}
+	
+	
  public void visualisarLivros() {
 		
 		for(Livro livro:livros) {
@@ -128,14 +151,17 @@ public void cadastrarLivro() {
  
 }
 
-tela
+
+
+tela:
+
 
 package tela;
 import java.util.Scanner;
 
 import model.Livro;
 
-public class livroInterfaceCadastro {
+public class LivroInterfaceCadastro {
 public Livro cadastrarLivro() {
 	int op = 0, contador=1;
 	Livro livro= new Livro();
@@ -163,6 +189,16 @@ public Livro cadastrarLivro() {
 
 package tela;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import controller.LivroController;
+import model.Livro;
+
+
+package tela;
+
 import model.Pagina;
 import java.util.Scanner;
 public class paginaInterfaceCadastro {	
@@ -182,14 +218,6 @@ public Pagina cadastrarPagina() {
 
 }
 
-package tela;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import controller.livroController;
-import model.Livro;
 
 
 
@@ -197,15 +225,16 @@ public class menuInterface {
  public void mostrarMenu() {
 		Scanner opcaoMenu = new Scanner(System.in);	
 		Scanner num = new Scanner(System.in);
-		int opcao = 0, a;
+		int opcao = 0, a, b;
 		List<Livro> livros= new ArrayList<>();
-	livroController livrocontroller = new livroController();
+	LivroController livrocontroller = new LivroController();
 		do{
 			System.out.println("1. Listar livros");
 			System.out.println("2. Cadastar livros");
 			System.out.println("3. Inserir Páginas");
 			System.out.println("4. Exibir Livro");
-			System.out.println("5. Sair");
+			System.out.println("5. Cadastrar linha em página já existente");
+			System.out.println("6. Sair");
 			System.out.print  ("Escolha uma Opção: ");
 	
 			opcao = opcaoMenu.nextInt();
@@ -225,16 +254,26 @@ public class menuInterface {
 					break;
 			case 4:
 				System.out.println("\nQual livro?\n");
+				livrocontroller.visualisarLivros();
 				a=num.nextInt();
 			        	livrocontroller.visualisarPagina(a-1);
 					break;
 			case 5:
+				System.out.println("\nQual livro?\n");
+				livrocontroller.visualisarLivros();
+				a=num.nextInt();
+				livrocontroller.visualisarPagina(a-1);
+				System.out.println("\nQual pagina?\n");
+				b=num.nextInt();
+				livrocontroller.cadastrarLinha(a-1, b);
+					break;		
+			case 6:
 				System.out.printf("\nTchau!\n");
 				    break;
 			default:
             	System.out.printf("\nOpção inválida, Tente novamente\n");
             	break;
 			}
-		} while(opcao !=5);
+		} while(opcao !=6);
  }
 }
