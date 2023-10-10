@@ -1,0 +1,216 @@
+#include <stdio.h>
+#include <new>    //<alloc.h>
+#include <ctype.h>
+#include <iostream>
+#include <stdlib.h>
+#include <windows.h>
+using namespace std;
+
+struct Aluno {
+     int matricula;
+     char nome[50];
+     float notas[3];
+     struct Aluno *pProx;
+} inicio, *pAux;
+
+Aluno *pgravar;
+int linha=0;
+
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD CursorPosition;
+
+void gotoxy(int x, int y){
+ CursorPosition.X = x; // Locates column
+ CursorPosition.Y = y; // Locates Row
+ SetConsoleCursorPosition(console,CursorPosition); // Sets position for next thing to be printed
+}
+
+void gravar_aluno(){
+FILE *pont_arq;
+    pont_arq = fopen("aluno.txt", "w");
+    if(pont_arq) {
+        if(inicio.pProx != NULL){
+            pgravar = inicio.pProx; /* aponta para o inicio da lista */
+             while(pgravar){
+                fprintf(pont_arq, "%d\n", pgravar->matricula);
+                fprintf(pont_arq, "%s\n",  pgravar->nome);
+                fprintf(pont_arq, "%.1f\n",  pgravar->notas[0]);
+                fprintf(pont_arq, "%.1f\n",  pgravar->notas[1]);
+                fprintf(pont_arq, "%.1f\n",  pgravar->notas[2]);
+                pgravar = pgravar->pProx;
+             }
+        }
+        fclose(pont_arq);
+    }
+    else {
+        cout << "Erro ao gravar arquivo!";
+        system("pause");
+    }
+}
+
+void ler_aluno(){
+    FILE *pont_arq;
+    pont_arq = fopen("aluno.txt", "r");
+    int contarq = 0;
+    char lido[500];
+    if(pont_arq) {
+        pAux = &inicio;
+        while(!feof(pont_arq)) {
+            if(fgets(lido, 500, pont_arq)) {
+                switch(contarq) {
+                case 0:
+                    pAux->pProx = new Aluno;
+                    pAux = pAux->pProx;
+                    pAux->matricula = atoi(lido);
+                    break;
+                case 1:
+                    char aux[50];
+                    strcpy(pAux->nome, lido);
+                    pAux->nome[strlen(pAux->nome)-1] = '\0';
+                    break;
+                case 2:
+                    pAux->notas[0] = atof(lido);
+                    break;
+                case 3:
+                    pAux->notas[1] = atof(lido);
+                    break;
+                case 4:
+                    pAux->notas[2] = atof(lido);
+                    contarq = -1;
+                    break;
+                }
+                contarq++;
+            }
+        }
+        pAux->pProx = NULL;
+        fclose(pont_arq);
+    }
+    else {
+        cout << "Erro ao ler arquivo!";
+        system("pause");
+    }
+}
+
+void inserir_aluno(){
+char escolha='0';
+pAux = &inicio;
+   while(pAux->pProx)
+     pAux = pAux->pProx;
+   do{
+     pAux->pProx = new Aluno;
+     pAux = pAux->pProx;
+     system("cls");
+     cout<<"--------CADASTRO DE ALUNO(S)--------";
+     cout << "\nInforme a Matricula do novo aluno: ";
+     cin >> pAux->matricula;
+     cout << "\nInforme o nome do novo Aluno: ";
+     fflush(stdin);
+     gets(pAux->nome);
+     cout << "\nNota1: ";
+     cin >> pAux->notas[0];
+     cout << "\nNota2: ";
+     cin >> pAux->notas[1];
+     pAux->notas[2]= (pAux->notas[0] + pAux->notas[1])/2;
+     pAux->pProx = NULL;
+     cout << "Deseja continuar?\nSim[S]\nNão[N, ou demais teclas]---->";
+     cin >> escolha;
+     escolha = toupper(escolha);
+   }while (escolha == 'S');
+   gravar_aluno();
+}
+
+void exibir_aluno(){
+if(inicio.pProx != NULL){
+     pAux = inicio.pProx;
+     linha=2;
+     cout << "---------------------------------------------------------------------------";
+     gotoxy(1,linha);
+     cout << "Matricula";
+     gotoxy(15,linha);
+     cout << "Nome";
+     gotoxy(50,linha);
+     cout << "Nota1";
+     gotoxy(60,linha);
+     cout << "Nota2";
+     gotoxy(70,linha);
+     cout << "Media";
+     cout << "\n---------------------------------------------------------------------------";
+     linha=4;
+     while(pAux){
+       gotoxy(1,linha);
+       cout << pAux->matricula;
+       gotoxy(15,linha);
+       cout << pAux->nome;
+       gotoxy(50,linha);
+       cout <<  pAux->notas[0];
+       gotoxy(60,linha);
+       cout << pAux->notas[1];
+       gotoxy(70,linha);
+       cout << pAux->notas[2];
+       pAux = pAux->pProx;
+       linha++;
+     }
+    cout << "\n---------------------------------------------------------------------------\n";
+  }
+  else{
+    gotoxy(15,18);
+    cout << "ATENCAO: Alunos inexistentes!\n";
+  }
+}
+
+void buscar_aluno(){
+
+}
+
+void excluir_aluno(){
+
+}
+
+void alterar_aluno(){
+
+}
+
+void menu(){
+    int op=1;
+    do{
+            system("cls");
+       cout<<"\t\tO QUE DESEJA FAZER?\n";
+       cout<<"SAIR-0\nINSERIR-1\nEXIBIR-2\nEXCLUIR-3\nALTERAR-4\n:";
+       cin>>op;
+       switch(op){
+       case 0:
+           system("cls");
+           cout<<"TCHAU";
+       break;
+       case 1:
+           system("cls");
+           inserir_aluno();
+           system("pause");
+       break;
+       case 2:
+           system("cls");
+           exibir_aluno();
+           system("pause");
+       break;
+       case 3:
+           system("cls");
+           excluir_aluno();
+           system("pause");
+       break;
+       case 4:
+           system("cls");
+           alterar_aluno();
+           system("pause");
+       break;
+       default:
+        cout<<"\nOpção inválida, tente novamente!\n";
+        system("pause");
+       break;
+       }
+    }while(op!=0);
+}
+
+int main(){
+ler_aluno();
+menu();
+}
