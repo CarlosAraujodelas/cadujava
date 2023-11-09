@@ -1,1 +1,5 @@
-
+package model;
+public class Curso {
+	public String nome, sigla;
+	public Departamento departamento;
+}
