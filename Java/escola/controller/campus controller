@@ -1,1 +1,30 @@
+package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Campus;
+import tela.CampusInterfaceCadastro;
+
+public class CampusController{
+	List<Campus> campu= new ArrayList<>();
+	
+	
+	public void cadastrarCampus() {
+		CampusInterfaceCadastro cam = new CampusInterfaceCadastro();
+		campu.add(cam.cadastrarCampus());
+			
+	}
+	
+	public void visualizarCampus() {
+		
+		for(Campus  campus:campu) {
+			System.out.printf("Total de Campus: %d\n", campu.size());
+			System.out.printf("Nome: %s\n", campus.nome);
+			System.out.printf("Sigla: %s\n", campus.sigla);
+			System.out.printf("Bairro: %s\n", campus.bairro);
+			System.out.printf("Cidade: %s\n", campus.cidade);
+		}
+	}
+			
+}
