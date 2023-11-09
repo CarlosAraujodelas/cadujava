@@ -1,1 +1,59 @@
+package model;
+
+public class Ingresso extends Produto {
+ int numero;
+ float preco;
+ String localevento, comprador;
+ Evento evento;
+ 
+ 
+ public Ingresso() {
+		
+ }
+ 
+public int getNumero() {
+	return numero;
+}
+public void setNumero(int numero) {
+	this.numero = numero;
+}
+public float getPreco() {
+	return preco;
+}
+public void setPreco(float preco) {
+	this.preco = preco;
+}
+public String getLocalevento() {
+	return localevento;
+}
+public void setLocalevento(String localevento) {
+	this.localevento = localevento;
+}
+public String getComprador() {
+	return comprador;
+}
+public void setComprador(String comprador) {
+	this.comprador = comprador;
+}
+public Evento getEvento() {
+	return evento;
+}
+public void setEvento(Evento evento) {
+	this.evento = evento;
+}
+
+public String getDescricao() {
+	if(super.getDescricao()!=null);
+	//return super.getDescricao();
+	return evento.getNome();
+}
+
+
+@Override
+public String toString() {
+	return "Ingresso [numero=" + numero + ", preco=" + preco + ", localevento=" + localevento + ", comprador="
+			+ comprador + ", evento=" + evento + "]";
+	
+}
+}
 
