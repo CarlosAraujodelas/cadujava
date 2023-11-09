@@ -1,1 +1,56 @@
-
+public class menuInterface {
+ public void mostrarMenu() {
+		Scanner opcaoMenu = new Scanner(System.in);	
+		Scanner num = new Scanner(System.in);
+		int opcao = 0, a, b;
+		List<Livro> livros= new ArrayList<>();
+	LivroController livrocontroller = new LivroController();
+		do{
+			System.out.println("1. Listar livros");
+			System.out.println("2. Cadastar livros");
+			System.out.println("3. Inserir Páginas");
+			System.out.println("4. Exibir Livro");
+			System.out.println("5. Cadastrar linha em página já existente");
+			System.out.println("6. Sair");
+			System.out.print  ("Escolha uma Opção: ");
+	
+			opcao = opcaoMenu.nextInt();
+			
+			switch (opcao) {
+			case 1: 
+					livrocontroller.visualisarLivros();
+					break;
+				
+			case 2:
+				 livrocontroller.cadastrarLivro();
+					break;
+			case 3:
+				System.out.println("\nQual livro?\n");
+				a=num.nextInt();
+			        	livrocontroller.cadastrarPagina(a-1);
+					break;
+			case 4:
+				System.out.println("\nQual livro?\n");
+				livrocontroller.visualisarLivros();
+				a=num.nextInt();
+			        	livrocontroller.visualisarPagina(a-1);
+					break;
+			case 5:
+				System.out.println("\nQual livro?\n");
+				livrocontroller.visualisarLivros();
+				a=num.nextInt();
+				livrocontroller.visualisarPagina(a-1);
+				System.out.println("\nQual pagina?\n");
+				b=num.nextInt();
+				livrocontroller.cadastrarLinha(a-1, b);
+					break;		
+			case 6:
+				System.out.printf("\nTchau!\n");
+				    break;
+			default:
+            	System.out.printf("\nOpção inválida, Tente novamente\n");
+            	break;
+			}
+		} while(opcao !=6);
+ }
+}
