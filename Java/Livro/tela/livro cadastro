@@ -1,1 +1,30 @@
+package tela;
+import java.util.Scanner;
+
+import model.Livro;
+
+public class LivroInterfaceCadastro {
+public Livro cadastrarLivro() {
+	int op = 0, contador=1;
+	Livro livro= new Livro();
+	Scanner a = new Scanner (System.in);
+	Scanner b = new Scanner (System.in);
+	
+	System.out.printf("------CADASTRO DE LIVRO-------\n");
+	System.out.printf("Nome do Livro\n:");
+	livro.setTitulo(a.nextLine());
+	
+	System.out.printf("Autores\n:");
+	while(op!=2) {
+		System.out.printf("Autor %d:", contador);
+		livro.inserirAutores(a.nextLine());
+		System.out.printf("Continuar inserindo autores?\n[1]-SIM\n[2]-NÃO\n:");
+		op=b.nextInt();
+		contador++;
+	}
+	contador=1;
+	return livro;
+}
+	
+}
 
