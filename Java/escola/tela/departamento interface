@@ -1,1 +1,20 @@
+package tela;
 
+import java.util.Scanner;
+
+import model.Departamento;
+
+public class DepartamentoInterfaceCadastro {
+	public Departamento cadastrarDepartamento() {
+		Departamento departamento = new Departamento ();
+		Scanner a = new Scanner (System.in);
+		
+		System.out.print("Informe o nome do Departamento: ");
+		departamento.nome = a.nextLine();
+		
+		System.out.print("Informe a sigla do Departamento: ");
+		departamento.sigla = a.nextLine();
+		
+		return departamento;
+	}
+}
