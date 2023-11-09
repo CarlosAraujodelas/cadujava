@@ -1,1 +1,60 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Livro extends Produto {
+private String titulo, isbn, editora ;
+private List<String> autores = new ArrayList<>();
+
+
+public Livro () {
+	
+}
+
+public String getTitulo() {
+	return titulo;
+}
+public void setTitulo(String titulo) {
+	this.titulo = titulo;
+}
+public String getIsbn() {
+	return isbn;
+}
+public void setIsbn(String isbn) {
+	this.isbn = isbn;
+}
+public String getEditora() {
+	return editora;
+}
+public void setEditora(String editora) {
+	this.editora = editora;
+}
+
+
+
+
+public List<String> getAutores() {
+	return autores;
+}
+
+
+public void inserirAutor(String autor) {
+	autores.add(autor);
+}
+
+public String getDescricao() {
+	return titulo + " - " + autores;
+}
+
+
+
+
+@Override
+public String toString() {
+	return "Livro [titulo=" + titulo + ", isbn=" + isbn + ", editora=" + editora + ", autores=" + autores + "]";
+}	
+
+ 
+}
 
