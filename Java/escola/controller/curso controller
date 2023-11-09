@@ -1,1 +1,29 @@
+package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Curso;
+import tela.CursoInterfaceCadastro;
+
+public class CursoController {
+	List<Curso> cursos = new ArrayList<>();
+	
+	
+	public void cadastrarCurso() {
+		CursoInterfaceCadastro cur = new CursoInterfaceCadastro();
+		cursos.add(cur.cadastrarCurso());
+				
+	}
+	
+	public void visualizarCurso() {
+		
+		for(Curso curso:cursos) {
+			System.out.printf("Total de Curso: %d\n", cursos.size());
+			System.out.printf("Nome: %s\n", curso.nome);
+			System.out.printf("Sigla: %s\n", curso.sigla);
+			
+		}
+	}
+			
+}
