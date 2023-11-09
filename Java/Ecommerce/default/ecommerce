@@ -1,1 +1,64 @@
+import controller.produtoController;
+import model.Evento;
+import model.Ingresso;
+import model.Livro;
+import model.Organizador;
+import model.Produto;
 
+public class Ecommerce {
+
+	public static void main(String[] args) {
+		
+		
+		
+		
+		Organizador organizador = new Organizador();
+		organizador.setNome("Dorival");
+		organizador.setCnpj("216256435");
+		Evento evento = new Evento();
+		evento.setOrganizador(organizador);
+		evento.setNome("Campus party");
+		Ingresso ingresso = new Ingresso();
+		ingresso.setComprador("Carlos Araújo");
+		ingresso.setEvento(evento);
+		Livro livro = new Livro();
+		System.out.println(livro);
+		int cont;
+		 produtoController a = new produtoController();
+		 
+		 Produto prod = new Produto();
+		 prod.setDescricao("vassoura");
+		 prod.setPrecoAtual(9.6F);
+		 prod.setQteEstoque(3);
+		Ingresso g = new Ingresso();
+		
+		 Livro livro2 = new Livro();
+		 livro2.inserirAutor("Maquiavél");
+		 livro2.setTitulo("O príncipe");
+		Produto p;
+		p = new Livro();
+		Livro l= new Livro();	
+		Livro l2;
+		p.setDescricao("Livro o Hobit capa dura -  Edição especial");
+		l2 = (Livro) p;
+        l2.setTitulo("O Hobit");
+        l2.inserirAutor("J.R.R Tolkien");
+        l2.inserirAutor("Carlos");
+        //System.out.printf("Descrição : %s",p.getDescricao());
+        
+        
+        Livro l3 = new Livro();
+        l3.setTitulo("Bíblia");
+        l3.inserirAutor("Deus");
+        l3.setPrecoAtual(15F);
+        a.inserirProduto(p);
+        a.inserirProduto(ingresso);
+        a.inserirProduto(livro2);
+        a.inserirProduto(prod);
+        a.inserirProduto(l3);
+        for(cont=0;cont<a.quantidadeprodutos();cont++) {
+        	System.out.println(a.getProduto(cont));
+        }
+        
+	}
+}                                                         
