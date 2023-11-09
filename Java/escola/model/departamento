@@ -1,1 +1,5 @@
-
+package model;
+public class Departamento {
+	public String nome, sigla;
+	public Campus campus;
+}
