@@ -1,1 +1,30 @@
+package tela;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import controller.LivroController;
+import model.Livro;
+
+
+package tela;
+
+import model.Pagina;
+import java.util.Scanner;
+public class paginaInterfaceCadastro {	
+public Pagina cadastrarPagina() {	
+	Pagina pagina = new Pagina();
+	String compara="a";
+	Scanner a = new Scanner (System.in);
+	System.out.printf("Comece a inserir as linhas!\nPara parar digite !! ");
+	do {
+		compara=a.nextLine();
+		if(!compara.equals("!!")) {
+			pagina.inserirLinhas(compara);
+		}
+	}while(!compara.equals("!!"));
+	return pagina;
+ }
+
+}
