@@ -1,1 +1,44 @@
+package model;
 
+public class Produto {
+	private String codigo, descricao;
+	private float precoAtual;
+	private int qteEstoque;
+	
+	public Produto() {
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", precoAtual=" + precoAtual + ", qteEstoque="
+				+ qteEstoque + "]";
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public float getPrecoAtual() {
+		return precoAtual;
+	}
+	public void setPrecoAtual(float precoAtual) {
+		this.precoAtual = precoAtual;
+	}
+	public int getQteEstoque() {
+		return qteEstoque;
+	}
+	
+	public void setQteEstoque(int qteEstoque) {
+		this.qteEstoque = qteEstoque;
+	}
+	
+}
