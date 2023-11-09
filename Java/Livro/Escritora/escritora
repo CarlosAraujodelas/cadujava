@@ -1,1 +1,11 @@
+import tela.menuInterface;
 
+public class Escritora {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+    menuInterface menu = new menuInterface();
+    menu.mostrarMenu();
+	}
+
+}
