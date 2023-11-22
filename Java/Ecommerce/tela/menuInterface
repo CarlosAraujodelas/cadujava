@@ -1,0 +1,75 @@
+package tela;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import controller.eventoController;
+import controller.organizadorController;
+import controller.produtoController;
+import model.Ingresso;
+import model.Livro;
+import model.Produto;
+
+public class menuInterface {
+	public void menu(){
+		
+	 List <Produto> produtos = new ArrayList<>();
+	 Livro a = new Livro();
+	 Ingresso i = new Ingresso();
+	 produtoController produtocontroller = new produtoController();
+	 organizadorController oc = new organizadorController();
+	 cadastroOrganizador co = new cadastroOrganizador();
+	 Scanner opcaoMenu = new Scanner(System.in);
+	 cadastroLivro cadL = new cadastroLivro();
+	 cadastroEvento ce = new cadastroEvento();
+	 eventoController ec = new eventoController();
+	 cadastroIngresso ci = new cadastroIngresso();
+	 int opcao;
+	 
+		do{
+			System.out.println("1. Cadastar organizador");
+			System.out.println("2. Cadastar evento");
+			System.out.println("3. Cadastar ingresso");
+			System.out.println("4. Listar ingresso(s)");
+			System.out.println("5. Cadastrar Livro");
+			System.out.println("6. Listar livro(s)");
+			System.out.println("7. Listar produto(s)");
+			System.out.println("8. Sair");
+			System.out.print  ("Escolha uma Opção: ");
+	
+			opcao = opcaoMenu.nextInt();
+			
+			switch (opcao) {
+			case 1: 
+				oc.inserirOrganizador(co.cadastrarOrganizador());
+				break;
+			case 2:
+				ec.inserirEvento(ce.cadastrarEvento());
+				break;
+			case 3:
+				produtocontroller.cadastroProduto(i);
+					break;
+			case 4:
+				ci.exibirIngresso();
+					break;
+			case 5:
+				produtocontroller.cadastroProduto(a);
+					break;
+			case 6:
+				cadL.exibirlivro();
+					break;		
+			case 7:
+			     produtocontroller.exibirProdutos();
+					break;	
+			case 8:
+				System.out.printf("\nTchau!\n");
+					break;	
+			default:
+         	System.out.printf("\nOpção inválida, Tente novamente\n");
+         	break;
+			}
+		} while(opcao !=7);
+ }
+	
+}
