@@ -4,15 +4,16 @@ import model.Ingresso;
 import model.Livro;
 import model.Organizador;
 import model.Produto;
+import tela.menuInterface;
 
 public class Ecommerce {
 
 	public static void main(String[] args) {
 		
+		menuInterface D = new menuInterface();
+		D.menu();
 		
-		
-		
-		Organizador organizador = new Organizador();
+		/*Organizador organizador = new Organizador();
 		organizador.setNome("Dorival");
 		organizador.setCnpj("216256435");
 		Evento evento = new Evento();
@@ -56,9 +57,22 @@ public class Ecommerce {
         a.inserirProduto(livro2);
         a.inserirProduto(prod);
         a.inserirProduto(l3);
+        
         for(cont=0;cont<a.quantidadeprodutos();cont++) {
         	System.out.println(a.getProduto(cont));
         }
         
+		
+		Produto p;
+		p = new Ingresso();
+		
+		if(p instanceof Livro) {
+			System.out.println("É livro");
+		}else {
+			System.out.println("É Ingresso");
+		}
+	   }
+	   */
 	}
-}                                                         
+}
+		                                                  
