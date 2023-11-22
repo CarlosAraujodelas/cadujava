@@ -1,0 +1,34 @@
+package tela;
+
+import java.sql.Date;
+import java.util.Scanner;
+
+import controller.organizadorController;
+import model.Evento;
+import model.Organizador;
+
+public class cadastroEvento {
+
+		public Evento cadastrarEvento() {
+		Evento evento = new Evento();
+		
+		organizadorController oc = new organizadorController();
+		Scanner e = new Scanner(System.in);
+		
+		System.out.printf("Informe o nome do evento: ");
+	    evento.setNome(e.nextLine());
+		
+		System.out.printf("Informe o local do evento: ");
+		evento.setLocal(e.nextLine());
+		
+		System.out.printf("Informe o tipo do evento: ");
+		evento.setTipo(e.nextLine());
+		
+		System.out.printf("Informe a data: ");
+        evento.setData(e.nextLine());
+	    
+        evento.setOrganizador(oc.escolherOrganizador());
+        
+        return evento;
+	}
+}
