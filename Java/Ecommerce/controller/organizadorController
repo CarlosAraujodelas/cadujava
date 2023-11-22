@@ -1,0 +1,30 @@
+package controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import model.Organizador;
+import tela.cadastroOrganizador;
+
+public class organizadorController {
+	 private List <Organizador> organizadores = new ArrayList<>();
+	 Organizador o = new Organizador();
+	 
+	 public void inserirOrganizador(Organizador organizador) {
+		 organizadores.add(organizador);
+	 }
+	 
+	 public Organizador escolherOrganizador() {
+		 int cont, pos;
+		 Scanner a = new Scanner(System.in);
+		 Organizador oAux = new Organizador();
+		 for(cont=0;cont<organizadores.size();cont++) {
+			 System.out.printf("Organizador %d : %s\n",cont+1, organizadores.get(cont).toString());
+		 }
+		 System.out.printf("Escolha o organizador : ");
+		 pos=a.nextInt();
+		 return organizadores.get(pos-1);
+	 }
+	
+}
