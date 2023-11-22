@@ -1,0 +1,53 @@
+package tela;
+
+import java.util.Scanner;
+
+import controller.produtoController;
+import model.Livro;
+
+public class cadastroLivro {
+
+	public Livro cadastrarLivro() {
+		Livro livro = new Livro();
+		
+		Scanner e = new Scanner(System.in);
+		Scanner b = new Scanner(System.in);
+		int op=0, contador=1;
+		System.out.printf("Informe o título do livro: ");
+		livro.setTitulo(e.nextLine());
+		
+		System.out.printf("Informe a isbn do livro: ");
+		livro.setIsbn(e.nextLine());
+		
+		System.out.printf("Informe a editora do livro: ");
+		livro.setEditora(e.nextLine());
+		
+		
+		System.out.printf("Autores\n:");
+		
+		while(op!=2) {
+			System.out.printf("Autor %d:", contador);
+			livro.inserirAutor(e.nextLine());
+			System.out.printf("Continuar inserindo autores?\n[1]-SIM\n[2]-NÃO\n:");
+			op=b.nextInt();
+			contador++;
+		}
+		
+		
+		contador=1;
+		return livro;
+	}
+	
+	public void exibirlivro() {
+		Livro livroaux;
+		produtoController pl = new produtoController();
+		int cont;
+		for(cont=0;cont<pl.quantidadeprodutos();cont++) {
+				if(pl.getProduto(cont) instanceof Livro) {
+					livroaux = (Livro) pl.getProduto(cont);
+				    System.out.println(livroaux.getQteEstoque());
+				}
+		}
+	}
+	
+}
