@@ -1,0 +1,29 @@
+package controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import model.Evento;
+import model.Organizador;
+
+public class eventoController {
+		 private List <Evento> eventos = new ArrayList<>();
+		 Evento e = new Evento();
+		 
+		 public void inserirEvento(Evento evento) {
+			 eventos.add(evento);
+		 }
+		 
+		 public Evento escolherEvento() {
+			 int cont, pos;
+			 Scanner a = new Scanner(System.in);
+			 Evento eAux = new Evento();
+			 for(cont=0;cont<eventos.size();cont++) {
+				 System.out.printf("Evento %d : %s\n",cont+1, eventos.get(cont).toString());
+			 }
+			 System.out.printf("Escolha o evento : ");
+			 pos=a.nextInt();
+			 return eventos.get(pos-1);
+		 }
+ }
