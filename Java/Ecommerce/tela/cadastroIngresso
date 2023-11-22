@@ -1,0 +1,48 @@
+package tela;
+
+import java.util.Scanner;
+
+import controller.eventoController;
+import controller.produtoController;
+import model.Evento;
+import model.Ingresso;
+import model.Livro;
+
+public class cadastroIngresso {
+	public Ingresso cadastrarIngresso() {
+		Ingresso ingresso = new Ingresso();
+		eventoController ec = new eventoController();
+		Scanner e = new Scanner(System.in);
+		Scanner b = new Scanner(System.in);
+		
+		System.out.printf("Informe o número do ingresso: ");
+	    ingresso.setNumero(e.nextInt());
+		
+		System.out.printf("Informe o preço do ingresso: ");
+		ingresso.setPreco(e.nextFloat());
+		
+		System.out.printf("Informe o local do ingresso: ");
+		ingresso.setLocalevento(e.nextLine());
+		
+		System.out.printf("Informe o comprador do ingresso: ");
+		ingresso.setComprador(e.nextLine());
+	    
+		ingresso.setEvento(ec.escolherEvento());
+		
+        return ingresso;
+	}
+	
+	public void exibirIngresso() {
+		Ingresso ingressoaux;
+		produtoController pl = new produtoController();
+		int cont;
+		for(cont=0;cont<pl.quantidadeprodutos();cont++) {
+				if(pl.getProduto(cont) instanceof Livro) {
+					ingressoaux = (Ingresso) pl.getProduto(cont);
+				    System.out.println(ingressoaux.getQteEstoque());
+				}
+		}
+	}
+	
+	
+}
