@@ -1,0 +1,31 @@
+package tela;
+
+import java.util.Scanner;
+
+import model.Livro;
+import model.Organizador;
+
+public class cadastroOrganizador {
+	public Organizador cadastrarOrganizador() {
+	Organizador organizador = new Organizador();
+	
+	Scanner e = new Scanner(System.in);
+	
+	System.out.printf("Informe o nome do organizador: ");
+    organizador.setNome(e.nextLine());
+	
+	System.out.printf("Informe a razão social: ");
+	organizador.setRezaoSocial(e.nextLine());
+	
+	System.out.printf("Informe o CNPJ: ");
+	organizador.setCnpj(e.nextLine());
+	
+	System.out.printf("Informe o endereço: ");
+	organizador.setEndereco(e.nextLine());
+	
+	System.out.printf("Informe o responsavél: ");
+	organizador.setResponsavel(e.nextLine());
+	
+	return organizador;
+}
+}
