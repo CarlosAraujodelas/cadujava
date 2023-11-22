@@ -1,11 +1,19 @@
 package controller;
+import tela.cadastroIngresso;
+import tela.cadastroLivro;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Livro;
 import model.Produto;
 public class produtoController {
  private List <Produto> produtos = new ArrayList<>();
+ Produto a;
+ 
+ Livro l1= new Livro();
+ cadastroLivro cadl = new cadastroLivro();
+ cadastroIngresso cadi = new cadastroIngresso();
  
  public void inserirProduto(Produto produto) {
 	 produtos.add(produto);
@@ -15,8 +23,28 @@ public class produtoController {
 	 return produtos.get(indice);
  }
  
+
  public int quantidadeprodutos() {
 	 return produtos.size();
+ }
+ 
+ 
+ public void cadastroProduto(Produto a) {
+ if(a instanceof Livro) {
+	 a = cadl.cadastrarLivro();
+		inserirProduto(a); 
+	}else {
+	a = cadi.cadastrarIngresso();
+	inserirProduto(a); 
+	}
+ }
+ 
+ 
+ public void exibirProdutos() {
+	 int cont;
+	 for(cont=0;cont<quantidadeprodutos();cont++) {
+     	System.out.println(getProduto(cont));
+     }
  }
  
 }
