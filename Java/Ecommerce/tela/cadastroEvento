@@ -9,10 +9,10 @@ import model.Organizador;
 
 public class cadastroEvento {
 
-		public Evento cadastrarEvento() {
+		public Evento cadastrarEvento(Organizador oc) {
 		Evento evento = new Evento();
 		
-		organizadorController oc = new organizadorController();
+		
 		Scanner e = new Scanner(System.in);
 		
 		System.out.printf("Informe o nome do evento: ");
@@ -27,7 +27,7 @@ public class cadastroEvento {
 		System.out.printf("Informe a data: ");
         evento.setData(e.nextLine());
 	    
-        evento.setOrganizador(oc.escolherOrganizador());
+        evento.setOrganizador(oc);
         
         return evento;
 	}
