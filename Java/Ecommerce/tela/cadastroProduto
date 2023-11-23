@@ -1,0 +1,29 @@
+package tela;
+
+import java.util.Scanner;
+
+import model.Organizador;
+import model.Produto;
+
+public class cadastroProduto {
+
+	public Produto cadastrarproduto() {
+		Produto produto = new Produto();
+		
+		Scanner e = new Scanner(System.in);
+		
+		System.out.printf("Informe o código do produto: ");
+	    produto.setCodigo(e.nextLine());
+		
+		System.out.printf("Informe a descriçaõ do produto: ");
+		produto.setDescricao(e.nextLine());
+		
+		System.out.printf("Informe o preço: ");
+		produto.setPrecoAtual(e.nextFloat());
+		
+		System.out.printf("Informe a quantidade: ");
+		produto.setQteEstoque(e.nextInt());
+		
+		return produto;
+}
+}
