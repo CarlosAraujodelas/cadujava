@@ -7,6 +7,7 @@ import java.util.Scanner;
 import controller.eventoController;
 import controller.organizadorController;
 import controller.produtoController;
+import model.Evento;
 import model.Ingresso;
 import model.Livro;
 import model.Produto;
@@ -17,6 +18,7 @@ public class menuInterface {
 	 List <Produto> produtos = new ArrayList<>();
 	 Livro a = new Livro();
 	 Ingresso i = new Ingresso();
+	 Evento evento;
 	 produtoController produtocontroller = new produtoController();
 	 organizadorController oc = new organizadorController();
 	 cadastroOrganizador co = new cadastroOrganizador();
@@ -25,7 +27,9 @@ public class menuInterface {
 	 cadastroEvento ce = new cadastroEvento();
 	 eventoController ec = new eventoController();
 	 cadastroIngresso ci = new cadastroIngresso();
+	 cadastroProduto cadp = new cadastroProduto();
 	 int opcao;
+	 int cont;
 	 
 		do{
 			System.out.println("1. Cadastar organizador");
@@ -34,8 +38,9 @@ public class menuInterface {
 			System.out.println("4. Listar ingresso(s)");
 			System.out.println("5. Cadastrar Livro");
 			System.out.println("6. Listar livro(s)");
+			System.out.println("7. Cadastrar produto");
 			System.out.println("7. Listar produto(s)");
-			System.out.println("8. Sair");
+			System.out.println("9. Sair");
 			System.out.print  ("Escolha uma Opção: ");
 	
 			opcao = opcaoMenu.nextInt();
@@ -45,24 +50,50 @@ public class menuInterface {
 				oc.inserirOrganizador(co.cadastrarOrganizador());
 				break;
 			case 2:
-				ec.inserirEvento(ce.cadastrarEvento());
+				if(oc.quantidadeorganizadores()==0) {
+					System.out.print("Só é possivél criar com organizadores existentes, crie um\n");
+				}else {
+					ec.inserirEvento(ce.cadastrarEvento(oc.escolherOrganizador()));
+				}
 				break;
 			case 3:
+				if(oc.quantidadeorganizadores()==0 || ec.quantidadeeventos()==0) {
+					System.out.print("Só é possivél criar com organizadores e eventos existentes, crie-os\n");
+				}else {
+				evento=ec.escolherEvento();
+				i.setEvento(evento);
 				produtocontroller.cadastroProduto(i);
+				}
 					break;
 			case 4:
-				ci.exibirIngresso();
+				Ingresso ingressoaux;
+				
+				for(cont=0;cont<produtocontroller.quantidadeprodutos();cont++) {
+						if(produtocontroller.getProduto(cont) instanceof Livro) {
+							ingressoaux = (Ingresso) produtocontroller.getProduto(cont);
+							System.out.printf("Ingresso %d : Código %d. Evento %s. Comprador: %s\n",cont+1, ingressoaux.getCodigo(),ingressoaux.getEvento(), ingressoaux.getComprador());    
+						}
+				}
 					break;
 			case 5:
 				produtocontroller.cadastroProduto(a);
 					break;
 			case 6:
-				cadL.exibirlivro();
+					Livro livroaux;
+					for(cont=0;cont<produtocontroller.quantidadeprodutos();cont++) {
+							if(produtocontroller.getProduto(cont) instanceof Livro) {
+								livroaux = (Livro) produtocontroller.getProduto(cont);
+								System.out.printf("Livro %d : Título %d. Autor %s. Editora: %s. ISBN : %s\n",livroaux.getTitulo(), livroaux.getAutores(),livroaux.getEditora(),livroaux.getIsbn());    
+							}
+					}
 					break;		
 			case 7:
-			     produtocontroller.exibirProdutos();
+				produtocontroller.cadProd(cadp.cadastrarproduto());
 					break;	
 			case 8:
+				 produtocontroller.exibirProdutos();
+					break;			
+			case 9:
 				System.out.printf("\nTchau!\n");
 					break;	
 			default:
