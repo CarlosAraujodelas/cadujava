@@ -20,10 +20,14 @@ public class eventoController {
 			 Scanner a = new Scanner(System.in);
 			 Evento eAux = new Evento();
 			 for(cont=0;cont<eventos.size();cont++) {
-				 System.out.printf("Evento %d : %s\n",cont+1, eventos.get(cont).toString());
+				 System.out.printf("Evento %d : Nome %s. Local %s\n",cont+1, eventos.get(cont).getNome(), eventos.get(cont).getLocal());
 			 }
 			 System.out.printf("Escolha o evento : ");
 			 pos=a.nextInt();
 			 return eventos.get(pos-1);
+		 }
+		 
+		 public int quantidadeeventos() {
+			 return eventos.size();
 		 }
  }
