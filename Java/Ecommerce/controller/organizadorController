@@ -20,11 +20,15 @@ public class organizadorController {
 		 Scanner a = new Scanner(System.in);
 		 Organizador oAux = new Organizador();
 		 for(cont=0;cont<organizadores.size();cont++) {
-			 System.out.printf("Organizador %d : %s\n",cont+1, organizadores.get(cont).toString());
+			 System.out.printf("Organizador %d : Nome %s. Cnpj %s\n",cont+1, organizadores.get(cont).getNome(),organizadores.get(cont).getCnpj());
 		 }
 		 System.out.printf("Escolha o organizador : ");
 		 pos=a.nextInt();
 		 return organizadores.get(pos-1);
+	 }
+	 
+	 public int quantidadeorganizadores() {
+		 return organizadores.size();
 	 }
 	
 }
