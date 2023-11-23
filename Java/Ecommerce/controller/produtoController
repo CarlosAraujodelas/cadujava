@@ -4,8 +4,10 @@ import tela.cadastroLivro;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import model.Livro;
+import model.Organizador;
 import model.Produto;
 public class produtoController {
  private List <Produto> produtos = new ArrayList<>();
@@ -39,13 +41,18 @@ public class produtoController {
 	}
  }
  
+ public void cadProd(Produto p) {
+	 inserirProduto(p);
+ }
+ 
  
  public void exibirProdutos() {
 	 int cont;
 	 for(cont=0;cont<quantidadeprodutos();cont++) {
-     	System.out.println(getProduto(cont));
+     	System.out.println(getProduto(cont).toString());
      }
  }
  
-}
 
+ 
+}
