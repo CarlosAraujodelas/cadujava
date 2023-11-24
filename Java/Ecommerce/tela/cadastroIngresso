@@ -22,12 +22,11 @@ public class cadastroIngresso {
 		ingresso.setPreco(e.nextFloat());
 		
 		System.out.printf("Informe o local do ingresso: ");
-		ingresso.setLocalevento(e.nextLine());
+		ingresso.setLocalevento(b.nextLine());
 		
 		System.out.printf("Informe o comprador do ingresso: ");
-		ingresso.setComprador(e.nextLine());
+		ingresso.setComprador(b.nextLine());
 	    
-		ingresso.setEvento(ec.escolherEvento());
 		
         return ingresso;
 	}
