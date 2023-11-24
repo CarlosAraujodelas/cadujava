@@ -14,8 +14,6 @@ import model.Produto;
 
 public class menuInterface {
 	public void menu(){
-		
-	 List <Produto> produtos = new ArrayList<>();
 	 Livro a = new Livro();
 	 Ingresso i = new Ingresso();
 	 Evento evento;
@@ -99,7 +97,7 @@ public class menuInterface {
          	System.out.printf("\nOpção inválida, Tente novamente\n");
          	break;       
 			}
-		} while(opcao !=7);
+		} while(opcao !=9);
  }
 	
 }
