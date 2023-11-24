@@ -39,7 +39,7 @@ public class menuInterface {
 			System.out.println("5. Cadastrar Livro");
 			System.out.println("6. Listar livro(s)");
 			System.out.println("7. Cadastrar produto");
-			System.out.println("7. Listar produto(s)");
+			System.out.println("8. Listar produto(s)");
 			System.out.println("9. Sair");
 			System.out.print  ("Escolha uma Opção: ");
 	
@@ -67,11 +67,10 @@ public class menuInterface {
 					break;
 			case 4:
 				Ingresso ingressoaux;
-				
 				for(cont=0;cont<produtocontroller.quantidadeprodutos();cont++) {
-						if(produtocontroller.getProduto(cont) instanceof Livro) {
+						if(produtocontroller.getProduto(cont) instanceof Ingresso) {
 							ingressoaux = (Ingresso) produtocontroller.getProduto(cont);
-							System.out.printf("Ingresso %d : Código %d. Evento %s. Comprador: %s\n",cont+1, ingressoaux.getCodigo(),ingressoaux.getEvento(), ingressoaux.getComprador());    
+							System.out.printf("Ingresso %d : Número %d.  Comprador: %s. Evento %s\n",cont+1, ingressoaux.getNumero(), ingressoaux.getLocalevento());    
 						}
 				}
 					break;
@@ -83,7 +82,7 @@ public class menuInterface {
 					for(cont=0;cont<produtocontroller.quantidadeprodutos();cont++) {
 							if(produtocontroller.getProduto(cont) instanceof Livro) {
 								livroaux = (Livro) produtocontroller.getProduto(cont);
-								System.out.printf("Livro %d : Título %d. Autor %s. Editora: %s. ISBN : %s\n",livroaux.getTitulo(), livroaux.getAutores(),livroaux.getEditora(),livroaux.getIsbn());    
+								System.out.printf("Livro %d : Título %s. Autor %s. Editora: %s. ISBN : %s\n",cont+1,livroaux.getTitulo(), livroaux.getAutores(),livroaux.getEditora(),livroaux.getIsbn());    
 							}
 					}
 					break;		
@@ -98,7 +97,7 @@ public class menuInterface {
 					break;	
 			default:
          	System.out.printf("\nOpção inválida, Tente novamente\n");
-         	break;
+         	break;       
 			}
 		} while(opcao !=7);
  }
