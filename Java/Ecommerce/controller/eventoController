@@ -20,7 +20,7 @@ public class eventoController {
 			 Scanner a = new Scanner(System.in);
 			 Evento eAux = new Evento();
 			 for(cont=0;cont<eventos.size();cont++) {
-				 System.out.printf("Evento %d : Nome %s. Local %s\n",cont+1, eventos.get(cont).getNome(), eventos.get(cont).getLocal());
+				 System.out.printf("Evento %d : Nome %s. Local %s. Organizador: %s\n",cont+1, eventos.get(cont).getNome(), eventos.get(cont).getLocal(), eventos.get(cont).getOrganizador().getNome());
 			 }
 			 System.out.printf("Escolha o evento : ");
 			 pos=a.nextInt();
