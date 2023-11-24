@@ -70,7 +70,7 @@ public class menuInterface {
 				for(cont=0;cont<produtocontroller.quantidadeprodutos();cont++) {
 						if(produtocontroller.getProduto(cont) instanceof Ingresso) {
 							ingressoaux = (Ingresso) produtocontroller.getProduto(cont);
-							System.out.printf("Ingresso %d : Número %d.  Comprador: %s. Evento %s\n",cont+1, ingressoaux.getNumero(), ingressoaux.getLocalevento());    
+							System.out.printf("Ingresso %d : Número %d.  Comprador: %s. Evento %s\n",cont+1, ingressoaux.getNumero(), ingressoaux.getComprador(),ingressoaux.getLocalevento());    
 						}
 				}
 					break;
