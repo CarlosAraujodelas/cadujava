@@ -1,0 +1,39 @@
+package model;
+
+public class Quadrilatero extends Figura {
+ private float a,b;
+ 
+	public float getA() {
+	return a;
+}
+
+public void setA(float a) {
+	this.a = a;
+}
+
+public float getB() {
+	return b;
+}
+
+public void setB(float b) {
+	this.b = b;
+}
+
+	@Override
+	public float area() {
+		return a*b;
+	}
+
+	@Override
+	public float perimetro() {
+		return (a*2)+(2*b);
+		
+	}
+
+	@Override
+	public float desenhar() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
