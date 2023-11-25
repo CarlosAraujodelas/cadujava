@@ -1,0 +1,32 @@
+import model.Circulo;
+import model.Quadrilatero;
+import model.Triangulo;
+import tela.menuInterface;
+import model.Geometria;
+public class Matematica {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		menuInterface a = new menuInterface();
+		a.menuMatematica();
+		/*
+		Geometria g = new Geometria();
+		Circulo c = new Circulo();
+		Triangulo t = new Triangulo();
+		Quadrilatero q = new Quadrilatero();
+		q.setA(2);
+		q.setB(2);
+		c.setRaio(2);
+		t.setA(6);
+		t.setB(5);
+		t.setC(5);
+		System.out.printf("%.2f\n",g.calcularPerimetro(q));
+		System.out.printf("%.2f\n",g.calcularArea(q));
+		System.out.printf("%.2f\n",g.calcularArea(c));
+		System.out.printf("%.2f\n",g.calcularPerimetro(t));
+		System.out.printf("%.2f\n",g.calcularArea(t));
+		*/
+	}
+
+}
