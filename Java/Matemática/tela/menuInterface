@@ -1,0 +1,91 @@
+package tela;
+import java.util.Scanner;
+
+import model.Circulo;
+import model.Geometria;
+import model.Quadrilatero;
+import model.Triangulo;
+public class menuInterface {
+ public void menuMatematica(){
+
+
+	     Geometria g = new Geometria();
+		 Circulo c = new Circulo();
+		 Triangulo t = new Triangulo();
+		 Quadrilatero q = new Quadrilatero();
+	 	 Scanner opcaoMenu = new Scanner(System.in);
+	 	 Scanner opcaoMenu2 = new Scanner(System.in);
+	 	 Scanner f  = new Scanner(System.in);
+	 	 int opcao;
+	 	 int esc=0;
+	 	 
+	 		do{
+	 			System.out.println("1.Triangulo");
+	 			System.out.println("2.Quadrilátero regular");
+	 			System.out.println("3.Círculo");
+	 			System.out.println("4. Sair");
+	 			System.out.print  ("Escolha uma Opção: ");
+	 	
+	 			opcao = opcaoMenu.nextInt();
+	 			
+	 			switch (opcao) {
+	 			case 1: 
+	 			System.out.printf("Lado 1 :");
+	 			t.setA(f.nextFloat());
+	 			System.out.printf("Lado 2 :");
+	 			t.setB(f.nextFloat());
+	 			System.out.printf("Lado 3 :");
+	 			t.setC(f.nextFloat());
+	 			while(esc<1 || esc> 2) {
+	 				System.out.println("1.Perímetro");
+		 			System.out.println("2.Área");
+		 			System.out.print  ("Escolha uma Opção: ");
+		 			esc = opcaoMenu2.nextInt();
+	 			}
+	 			if(esc==1) {
+	 				System.out.printf("Perímetro do triângulo : %.1f\n",g.calcularPerimetro(t));
+	 			}else {
+	 				System.out.printf("Área do triângulo : %.1f\n",g.calcularArea(t));
+	 			}
+	 				break;
+	 			case 2:
+	 				System.out.printf("Lado 1 :");
+		 			q.setA(f.nextFloat());
+		 			System.out.printf("Lado 2 :");
+		 			q.setB(f.nextFloat());
+		 			while(esc<1 || esc> 2) {
+		 				System.out.println("1.Perímetro");
+			 			System.out.println("2.Área");
+			 			System.out.print  ("Escolha uma Opção: ");
+			 			esc = opcaoMenu2.nextInt();
+		 			}
+		 			if(esc==1) {
+		 				System.out.printf("Perímetro do quadrilátero : %.1f\n",g.calcularPerimetro(q));
+		 			}else {
+		 				System.out.printf("Área do quadrilátero : %.1f\n",g.calcularArea(q));
+		 			}
+	 				break;
+	 			case 3:
+	 				System.out.printf("Raio :");
+		 			c.setRaio(f.nextFloat());
+		 			while(esc<1 || esc> 2) {
+		 				System.out.println("1.Perímetro");
+			 			System.out.println("2.Área");
+			 			System.out.print  ("Escolha uma Opção: ");
+			 			esc = opcaoMenu2.nextInt();
+		 			}
+		 			if(esc==1) {
+		 				System.out.printf("Perímetro do círculo : %.1f\n",g.calcularPerimetro(c));
+		 			}else {
+		 				System.out.printf("Área do círculo %.1f\n",g.calcularArea(c));
+		 			}
+	 					break;
+	 			case 4:
+	 				System.out.printf("Tchau!");
+	 					break;     
+	 			}
+	 			esc=0;
+	 		} while(opcao !=4);
+	  }
+}
+	 
