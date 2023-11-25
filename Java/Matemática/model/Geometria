@@ -1,0 +1,17 @@
+package model;
+
+public class Geometria {
+
+	public static float calcularArea(Figura figura) {
+	 return figura.area();
+	}
+	
+	public static float calcularPerimetro(Figura figura) {
+		return figura.perimetro();
+	}
+	
+	public static void desenhar(Figura figura) {
+		
+	}
+	
+}
