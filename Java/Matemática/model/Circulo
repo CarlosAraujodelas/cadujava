@@ -1,0 +1,30 @@
+package model;
+
+public class Circulo extends Figura {
+ private float raio;
+
+@Override
+public float area() {
+	return (float) (Math.PI*Math.pow(raio,2));
+}
+
+@Override
+public float perimetro() {
+	return (float) (Math.PI*2*raio);
+}
+
+@Override
+public float desenhar() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+public float getRaio() {
+	return raio;
+}
+
+public void setRaio(float raio) {
+	this.raio = raio;
+}
+ 
+}
